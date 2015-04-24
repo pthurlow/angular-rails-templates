@@ -7,6 +7,7 @@ module AngularRailsTemplates
     config.angular_templates.ignore_prefix  = ['templates/']
     config.angular_templates.markups        = []
     config.angular_templates.htmlcompressor = false
+    config.angular_templates.exclude_paths  = []
 
     config.before_configuration do |app|
       # try loading common markups
@@ -67,6 +68,9 @@ module AngularRailsTemplates
       # Ensure ignore_prefix can be passed as a String or Array
       if app.config.angular_templates.ignore_prefix.is_a? String
         app.config.angular_templates.ignore_prefix = Array(app.config.angular_templates.ignore_prefix)
+      end
+      if app.config.angular_templates.exclude_paths.is_a? String
+        app.config.angular_templates.exclude_paths = Array(app.config.angular_templates.exclude_paths)
       end
     end
   end

@@ -13,8 +13,11 @@ module AngularRailsTemplates
     def prepare
       # we only want to process html assets inside Rails.root/app/assets
       @asset_inside_rails_root = file.match "#{Rails.root.join 'app', 'assets'}"
+      @asset_excluded = configuration.exclude_paths.inject(false) do |excluded, path|
+        excluded || file.match "#{Rails.root.join 'app', 'assets'}" + "#{path}"
+      end
 
-      if configuration.htmlcompressor and @asset_inside_rails_root
+      if configuration.htmlcompressor and @asset_inside_rails_root not @asset_excluded
         @data = compress data
       end
     end
