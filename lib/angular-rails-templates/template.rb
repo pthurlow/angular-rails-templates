@@ -7,7 +7,7 @@ module AngularRailsTemplates
     @@compressor = nil
 
     def self.default_mime_type
-      @asset_excluded ? 'text/html' : 'application/javascript'
+      'text/html' #'application/javascript'
     end
 
     def prepare
